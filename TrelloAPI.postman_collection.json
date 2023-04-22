@@ -1,0 +1,551 @@
+{
+	"info": {
+		"_postman_id": "e91e2b20-37c7-4d82-bc05-7c7d36b54884",
+		"name": "TrelloAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15798278"
+	},
+	"item": [
+		{
+			"name": "TrelloLogs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api.trello.com/1/members/me/boards?key={{keyBorys}}&token={{tokBorys}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"members",
+						"me",
+						"boards"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{keyBorys}}"
+						},
+						{
+							"key": "token",
+							"value": "{{tokBorys}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateTrelloBoard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://api.trello.com/1/boards/?name=TestingBoard&key={{keyBorys}}&token={{tokBorys}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						""
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "TestingBoard"
+						},
+						{
+							"key": "key",
+							"value": "{{keyBorys}}"
+						},
+						{
+							"key": "token",
+							"value": "{{tokBorys}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TrelloGetBoards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/members/me/boards?fields=name,url&key={{keyBorys}}&token={{tokBorys}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"members",
+						"me",
+						"boards"
+					],
+					"query": [
+						{
+							"key": "fields",
+							"value": "name,url"
+						},
+						{
+							"key": "key",
+							"value": "{{keyBorys}}"
+						},
+						{
+							"key": "token",
+							"value": "{{tokBorys}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetListsFromBoard",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const Lists = pm.response.json();\r",
+							"pm.globals.set(\"List1\", Lists[0].id);\r",
+							"pm.globals.set(\"List2\", Lists[1].id);\r",
+							"pm.globals.set(\"List3\", Lists[2].id);\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://api.trello.com/1/boards/:id/lists?key={{keyBorys}}&token={{tokBorys}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						":id",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{keyBorys}}"
+						},
+						{
+							"key": "token",
+							"value": "{{tokBorys}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{idBoard}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateList1",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists/:list?key={{keyBorys}}&token={{tokBorys}}&name=Lista pierwsza",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists",
+						":list"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{keyBorys}}"
+						},
+						{
+							"key": "token",
+							"value": "{{tokBorys}}"
+						},
+						{
+							"key": "name",
+							"value": "Lista pierwsza"
+						}
+					],
+					"variable": [
+						{
+							"key": "list",
+							"value": "{{List1}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateList2",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists/:list?key={{keyBorys}}&token={{tokBorys}}&name=Lista druga",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists",
+						":list"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{keyBorys}}"
+						},
+						{
+							"key": "token",
+							"value": "{{tokBorys}}"
+						},
+						{
+							"key": "name",
+							"value": "Lista druga"
+						}
+					],
+					"variable": [
+						{
+							"key": "list",
+							"value": "{{List2}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateList3",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists/:list?key={{keyBorys}}&token={{tokBorys}}&name=Lista trzecia",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists",
+						":list"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{keyBorys}}"
+						},
+						{
+							"key": "token",
+							"value": "{{tokBorys}}"
+						},
+						{
+							"key": "name",
+							"value": "Lista trzecia"
+						}
+					],
+					"variable": [
+						{
+							"key": "list",
+							"value": "{{List3}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateList",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const Lists = pm.response.json();\r",
+							"pm.globals.set(\"List4\", Lists[3].id);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/lists?name=Lista czwarta&idBoard={{idBoard}}&key={{keyBorys}}&token={{tokBorys}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"lists"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Lista czwarta"
+						},
+						{
+							"key": "idBoard",
+							"value": "{{idBoard}}"
+						},
+						{
+							"key": "key",
+							"value": "{{keyBorys}}"
+						},
+						{
+							"key": "token",
+							"value": "{{tokBorys}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CardCreate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const Card = pm.response.json();\r",
+							"pm.globals.set(\"Card\", Card.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://api.trello.com/1/cards?idList={{List1}}&key={{keyBorys}}&token={{tokBorys}}&name=ZDTESTpol122",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"cards"
+					],
+					"query": [
+						{
+							"key": "idList",
+							"value": "{{List1}}"
+						},
+						{
+							"key": "key",
+							"value": "{{keyBorys}}"
+						},
+						{
+							"key": "token",
+							"value": "{{tokBorys}}"
+						},
+						{
+							"key": "name",
+							"value": "ZDTESTpol122"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateCard",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://api.trello.com/1/cards/:id?key={{keyBorys}}&token={{tokBorys}}&name=ZdTestpol122",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"cards",
+						":id"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{keyBorys}}"
+						},
+						{
+							"key": "token",
+							"value": "{{tokBorys}}"
+						},
+						{
+							"key": "name",
+							"value": "ZdTestpol122"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "6443e125b2b9ed7de934d10e"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteBoard",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://api.trello.com/1/boards/:id?key={{keyBorys}}&token={{tokBorys}}",
+					"protocol": "https",
+					"host": [
+						"api",
+						"trello",
+						"com"
+					],
+					"path": [
+						"1",
+						"boards",
+						":id"
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "{{keyBorys}}"
+						},
+						{
+							"key": "token",
+							"value": "{{tokBorys}}"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{idBoard}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
